@@ -52,7 +52,9 @@ public class MainActivity extends BaseDrawerLayoutActivity {
         return R.layout.activity_main;
     }
 
-    //阴影的高度
+    /**
+     *  阴影的高度
+     */
     @Override
     protected float getElevation() {
         return 0;
@@ -118,22 +120,24 @@ public class MainActivity extends BaseDrawerLayoutActivity {
             case R.id.menu_about:
                 AboutActivity.startAboutActivity(this);
                 return true;
-//            case R.id.menu_setting:
-//                return true;
             case R.id.menu_update:
                 initUpdate(true);
                 return true;
             case R.id.other:
                 AppContext.showSnackbar(getWindow().getDecorView(), "敬请期待");
                 return true;
+                default:break;
         }
         return super.onOptionsItemSelected(item);// || mCurrentFragment.onOptionsItemSelected(item);
     }
 
     private long customTime = 0;
 
+    /**
+     * 返回按钮
+     */
     @Override
-    public void onBackPressed() {//返回按钮
+    public void onBackPressed() {
         if (getDrawerLayout().isDrawerOpen(GravityCompat.START)) {//侧滑菜单打开，关闭菜单
             getDrawerLayout().closeDrawer(GravityCompat.START);
             return;
@@ -153,6 +157,10 @@ public class MainActivity extends BaseDrawerLayoutActivity {
     }
 
 
+    /**
+     * 更新检查
+     * @param isShow
+     */
     private void initUpdate(boolean isShow) {
         PgyUpdateManager.register(MainActivity.this,
                 new UpdateManagerListener() {
@@ -160,24 +168,20 @@ public class MainActivity extends BaseDrawerLayoutActivity {
                     public void onUpdateAvailable(final String result) {
                         final AppBean appBean = getAppBeanFromString(result);
                         if (appBean.getReleaseNote().startsWith("####")) {
-//                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
-//                            builder
-//                                    .setTitle("当前版本已经停用了")
-//                                    .setCancelable(false)
-//                                    .setMessage("更新到最新版?")
-//                                    .setNegativeButton("取消", (dialog, which) -> {
-//                                       finish();
-//                                    })
-//                                    .setPositiveButton("确定", (dialog1, which) -> {
-//                                        startDownloadTask(
-//                                                MainActivity.this,
-//                                                appBean.getDownloadURL());
-//                                        dialog1.dismiss();
-//                                    }).show();
-                            //强制更新
-                            startDownloadTask(
-                                    MainActivity.this,
-                                    appBean.getDownloadURL());
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
+                            builder
+                                    .setTitle("当前版本已经停用了")
+                                    .setCancelable(false)
+                                    .setMessage("更新到最新版?")
+                                    .setNegativeButton("取消", (dialog, which) -> {
+                                       finish();
+                                    })
+                                    .setPositiveButton("确定", (dialog1, which) -> {
+                                        startDownloadTask(
+                                                MainActivity.this,
+                                                appBean.getDownloadURL());
+                                        dialog1.dismiss();
+                                    }).show();
                         } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
                             builder

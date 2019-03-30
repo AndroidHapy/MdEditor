@@ -80,9 +80,9 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     private ActionMode mActionMode;
 
-    //文件粘贴模式ActionMode
+    /** 文件粘贴模式ActionMode */
     private ActionMode.Callback pasteModeCallback;
-    //文件编辑模式ActionMode
+    /** 文件编辑模式ActionMode */
     private ActionMode.Callback editModeCallback;
 
     @Override
@@ -117,7 +117,6 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mfileList.setLayoutManager(linearLayoutManager);
         mfileList.setAdapter(mAdapter = new FileListAdapter(mContext, files));
-//        mfileList.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
         mfileList.setItemAnimator(new DefaultItemAnimator());
         mfileList.setLongClickable(true);
         mAdapter.setOnItemClickLitener(this);
@@ -155,6 +154,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             case CALL_GET_FILES://获取文件列表
                 getSwipeRefreshLayout().setRefreshing(true);
                 break;
+                default:
         }
     }
 
@@ -164,6 +164,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             case CALL_GET_FILES://获取文件列表
                 finishRefresh();
                 break;
+                default:
         }
     }
 
@@ -203,6 +204,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             case CALL_REMOVE_TAB://移除标题
                 removeTab();
                 break;
+                default:
         }
     }
 
@@ -222,7 +224,9 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     private void closeActionMode() {
 //        mAdapter.notifyDataSetChanged();
-        if (mActionMode != null) mActionMode.finish();
+        if (mActionMode != null) {
+            mActionMode.finish();
+        }
         mActionMode = null;
     }
 
@@ -295,7 +299,9 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     @Override
     public void onItemLongClick(View view, int position) {
-        if (mPresenter.isEditMode()) return;
+        if (mPresenter.isEditMode()) {
+            return;
+        }
         FileBean fileBean = files.get(position);
         fileBean.isSelect = !fileBean.isSelect;
         mAdapter.notifyItemChanged(position);
@@ -357,13 +363,18 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
                 return true;
             }
 
+            @Override
             public boolean onQueryTextChange(String s) {
-                if (s.length() == 0) mPresenter.refreshCurrentPath();
+                if (s.length() == 0) {
+                    mPresenter.refreshCurrentPath();
+                }
                 return false;
             }
         });
         searchView.setOnQueryTextFocusChangeListener((view, queryTextFocused) -> {
-            if (queryTextFocused) searchViewIsShow = true;
+            if (queryTextFocused) {
+                searchViewIsShow = true;
+            }
         });
 
         AppCompatAutoCompleteTextView editText = (AppCompatAutoCompleteTextView) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
@@ -405,7 +416,6 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         //设置数据URI与数据类型匹配
         String path = new File(mPresenter.currentPath()).getPath();
         intent.setDataAndType(Uri.fromFile(new File(path)), "file");
-//        ViewUtils.startActivity(intent, getActivity(), v, EditorActivity.SHARED_ELEMENT_COLOR_NAME);
         startActivity(intent);
     }
 
@@ -493,6 +503,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
                         createFolder();
                         flag = true;
                         break;
+                        default:
                 }
                 return flag;
             }
@@ -508,7 +519,6 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             @Override
             public boolean onCreateActionModeCustom(ActionMode mode, Menu menu) {
                 MenuInflater inflater = mode.getMenuInflater();
-//                mode.setTitle("1");
                 inflater.inflate(R.menu.menu_action_folder, menu);
                 menu.findItem(R.id.action_edit).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                 menu.findItem(R.id.action_delete).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -533,6 +543,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
                     case R.id.action_cut:
                         cutFiles();
                         break;
+                        default:
                 }
                 return ret;
             }

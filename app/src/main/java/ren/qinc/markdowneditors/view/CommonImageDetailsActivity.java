@@ -44,7 +44,9 @@ import ren.qinc.markdowneditors.base.BaseToolbarActivity;
 /**
  * 单张图片查看(待使用)
  * The type Common image details activity.
- * Created by 沈钦赐 on 2015/12/20.
+ *
+ * @author 沈钦赐
+ * @date 2015/12/20
  */
 public class CommonImageDetailsActivity extends BaseToolbarActivity {
 

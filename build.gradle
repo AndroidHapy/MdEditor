@@ -2,13 +2,14 @@
 
 buildscript {
     repositories {
-        maven { url 'http://uk.maven.org/maven2' }
+
         jcenter()
         // maven
         mavenCentral()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
         // retro lambda
         classpath 'me.tatarka:gradle-retrolambda:3.2.4'
 
@@ -25,6 +26,8 @@ allprojects {
         flatDir {
             dirs 'libs'
         }
+        google()
+        maven { url 'http://uk.maven.org/maven2' }
     }
 }
 
