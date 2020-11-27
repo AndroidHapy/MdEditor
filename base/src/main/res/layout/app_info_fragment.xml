@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="blxt.qandroid.base.ui.AppInfoFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_app_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_name" />
+
+
+        <Button
+            android:id="@+id/btn_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_file_path"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="选择文件" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_app_info"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.blxt.quickview.item.SetItemViewSw
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:title="qeqwe"
+                android:hint="234"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_file_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_app_copyright"
+            android:layout_marginBottom="2dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tv_app_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="@string/app_copyright" />
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

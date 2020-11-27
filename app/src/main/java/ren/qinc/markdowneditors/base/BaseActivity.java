@@ -20,15 +20,15 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatCallback;
-import android.support.v7.view.ActionMode;
-import android.support.v7.view.StandaloneActionMode;
-import android.support.v7.widget.ActionBarContextView;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatCallback;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.view.StandaloneActionMode;
+import androidx.appcompat.widget.ActionBarContextView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -297,22 +297,22 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mCallbackField.set(mode, new ActionMode.Callback() {
 
                 @Override
-                public boolean onCreateActionMode(android.support.v7.view.ActionMode mode, Menu menu) {
+                public boolean onCreateActionMode(androidx.appcompat.view.ActionMode mode, Menu menu) {
                     return mWrapped.onCreateActionMode(mode, menu);
                 }
 
                 @Override
-                public boolean onPrepareActionMode(android.support.v7.view.ActionMode mode, Menu menu) {
+                public boolean onPrepareActionMode(androidx.appcompat.view.ActionMode mode, Menu menu) {
                     return mWrapped.onPrepareActionMode(mode, menu);
                 }
 
                 @Override
-                public boolean onActionItemClicked(android.support.v7.view.ActionMode mode, MenuItem item) {
+                public boolean onActionItemClicked(androidx.appcompat.view.ActionMode mode, MenuItem item) {
                     return mWrapped.onActionItemClicked(mode, item);
                 }
 
                 @Override
-                public void onDestroyActionMode(final android.support.v7.view.ActionMode mode) {
+                public void onDestroyActionMode(final androidx.appcompat.view.ActionMode mode) {
                     Class mDelegateClass = mDelegate.getClass().getSuperclass();
                     Window mWindow = null;
                     PopupWindow mActionModePopup = null;
@@ -320,7 +320,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                     ActionBarContextView mActionModeView = null;
                     AppCompatCallback mAppCompatCallback = null;
                     ViewPropertyAnimatorCompat mFadeAnim = null;
-                    android.support.v7.view.ActionMode mActionMode = null;
+                    androidx.appcompat.view.ActionMode mActionMode = null;
 
                     Field mFadeAnimField = null;
                     Field mActionModeField = null;
@@ -346,7 +346,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
                                 mActionModeField = mDelegateClass.getDeclaredField("mActionMode");
                                 mActionModeField.setAccessible(true);
-                                mActionMode = (android.support.v7.view.ActionMode) mActionModeField.get(mDelegate);
+                                mActionMode = (androidx.appcompat.view.ActionMode) mActionModeField.get(mDelegate);
 
                             } else if (TextUtils.equals("AppCompatDelegateImplBase", mDelegateClass.getSimpleName())) {
                                 Field mAppCompatCallbackField = mDelegateClass.getDeclaredField("mAppCompatCallback");
@@ -381,7 +381,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                         final ActionBarContextView mActionModeViewFinal = mActionModeView;
                         final ViewPropertyAnimatorCompat mFadeAnimFinal = mFadeAnim;
                         final AppCompatCallback mAppCompatCallbackFinal = mAppCompatCallback;
-                        final android.support.v7.view.ActionMode mActionModeFinal = mActionMode;
+                        final androidx.appcompat.view.ActionMode mActionModeFinal = mActionMode;
                         final Field mFadeAnimFieldFinal = mFadeAnimField;
                         final Field mActionModeFieldFinal = mActionModeField;
 

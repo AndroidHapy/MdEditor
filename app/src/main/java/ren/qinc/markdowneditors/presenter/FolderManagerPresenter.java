@@ -26,6 +26,7 @@ import java.util.Stack;
 
 import ren.qinc.markdowneditors.base.mvp.BasePresenter;
 import ren.qinc.markdowneditors.entity.FileBean;
+import ren.qinc.markdowneditors.utils.AppConfig;
 import ren.qinc.markdowneditors.utils.Check;
 import ren.qinc.markdowneditors.utils.FileUtils;
 import rx.Subscriber;
@@ -91,6 +92,10 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
 
                                        @Override
                                        public void onNext(List<FileBean> fileBeans) {
+                                           if(AppConfig.isShowMoreDir && fileStack.size() <= 1){ // 目录等级为1时,添加默认文件夹
+                                               fileBeans.addAll(mDataManager.getDefaultPath());
+                                           }
+
                                            files.clear();
                                            files.addAll(fileBeans);
                                            if (getMvpView() != null)

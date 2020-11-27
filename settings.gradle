@@ -1,1 +1,4 @@
+include ':base'
+include ':editormd'
 include ':app'
+rootProject.name = "MdReader"

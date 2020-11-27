@@ -27,10 +27,10 @@
     <string name="menu_web_horizontal">横屏显示</string>
     <string name="menu_web_vertical">竖屏显示</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">打开抽屉</string>
+    <string name="navigation_drawer_close">关闭抽屉</string>
 
-    <string name="Description">Description</string>
+    <string name="Description">描述</string>
     <string name="MainFileManagerNoPost">没有文章</string>
     <string name="MainFileManagerCreateHint">您可以点击右下角按钮创建新的文章</string>
     <string name="action_create_file">创建文章</string>
@@ -58,8 +58,8 @@
     <string name="action_setting">设置</string>
     <string name="about">关于</string>
 
-    <string name="copy_right" translatable="false">Copyrights © 2016</string>
-    <string name="version_string" translatable="false">Version %s</string>
+    <string name="copy_right" translatable="false">Copyrights © 2020</string>
+    <string name="version_string" translatable="false">版本: %s</string>
     <string name="contact_me">联系我们</string>
     <string name="connect_with_us">与我们联系</string>
     <string name="advertise_with_us">广告联系</string>

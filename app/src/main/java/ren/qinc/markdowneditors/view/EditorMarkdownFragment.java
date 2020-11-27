@@ -17,10 +17,15 @@
 package ren.qinc.markdowneditors.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.TextView;
 
+import com.blxt.quicklog.QLog;
+
+import blxt.qandroid.base.DataPool;
 import butterknife.Bind;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseFragment;
@@ -40,6 +45,7 @@ public class EditorMarkdownFragment extends BaseFragment {
 
 
     public EditorMarkdownFragment() {
+
     }
 
     public static EditorMarkdownFragment getInstance() {
@@ -59,11 +65,27 @@ public class EditorMarkdownFragment extends BaseFragment {
     @Override
     public void onEventMainThread(RxEvent event) {
         if (event.isTypeAndData(RxEvent.TYPE_REFRESH_DATA)) {
+
             //页面还没有加载完成
+            //    mName.setText(event.o[0].toString());
+            mName.setVisibility(View.GONE);
+
             mContent = event.o[1].toString();
-            mName.setText(event.o[0].toString());
-            if (isPageFinish)
-                mMarkdownPreviewView.parseMarkdown(mContent, true);
+
+            boolean isChange =  (Boolean) DataPool.getInstance().get("updata_mdview");
+            if(!isChange){
+                return;
+            }
+
+            DataPool.getInstance().put("updata_mdview", false);
+
+            String filePath =  (String) DataPool.getInstance().get("file_select");
+            QLog.i("预览文件, 文件:{}", filePath);
+
+            if (isPageFinish) {
+                //    mMarkdownPreviewView.showMdFromFile(filePath, true);
+                mMarkdownPreviewView.showMdFromStr(mContent);
+            }
         }
     }
 

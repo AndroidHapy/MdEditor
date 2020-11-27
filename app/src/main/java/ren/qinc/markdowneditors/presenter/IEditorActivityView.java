@@ -16,7 +16,7 @@
 
 package ren.qinc.markdowneditors.presenter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import ren.qinc.markdowneditors.base.mvp.IMvpView;
 

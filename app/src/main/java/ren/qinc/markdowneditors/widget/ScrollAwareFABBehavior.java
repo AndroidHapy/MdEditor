@@ -22,11 +22,11 @@ package ren.qinc.markdowneditors.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -100,7 +100,7 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
                     .start();
         } else {
             Animation anim = AnimationUtils.loadAnimation(button.getContext(),
-                    android.support.design.R.anim.abc_fade_out);
+                    com.google.android.material.R.anim.abc_fade_out);
             anim.setInterpolator(INTERPOLATOR);
             anim.setDuration(200L);
             anim.setAnimationListener(new Animation.AnimationListener() {
@@ -142,7 +142,7 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
                     .start();
         } else {
             Animation anim = AnimationUtils.loadAnimation(button.getContext(),
-                    android.support.design.R.anim.abc_fade_in);
+                    com.google.android.material.R.anim.abc_fade_in);
             anim.setDuration(200L);
             anim.setInterpolator(INTERPOLATOR);
             button.startAnimation(anim);

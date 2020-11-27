@@ -19,9 +19,9 @@ package ren.qinc.markdowneditors.view;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import blxt.qandroid.base.DataPool;
 import butterknife.Bind;
 import de.mrapp.android.bottomsheet.BottomSheet;
 import ren.qinc.edit.PerformEdit;
@@ -67,6 +68,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
     private PerformEdit mPerformNameEdit;
 
     public EditorFragment() {
+        DataPool.getInstance().put("isChangeContent", true);
     }
 
     public static EditorFragment getInstance(String filePath) {
@@ -107,6 +109,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
             protected void onTextChanged(Editable s) {
                 //文本改变
                 mPresenter.textChange();
+                DataPool.getInstance().put("updata_mdview", true);
             }
         };
 
@@ -115,6 +118,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
             protected void onTextChanged(Editable s) {
                 //文本改变
                 mPresenter.textChange();
+                DataPool.getInstance().put("updata_mdview", true);
             }
         };
 

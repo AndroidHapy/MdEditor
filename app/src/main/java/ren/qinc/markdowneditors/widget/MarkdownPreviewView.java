@@ -21,13 +21,24 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Build.VERSION;
-import android.support.v4.widget.NestedScrollView;
+import androidx.core.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.blxt.quickfile4a.QFile4a;
+import com.blxt.quicklog.QLog;
+import com.blxt.utils.Converter;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import blxt.android.editormd.util.FilePathTools;
+import blxt.qandroid.base.DataPool;
 import ren.qinc.markdowneditors.base.BaseWebActivity;
 
 /**
@@ -39,6 +50,7 @@ public class MarkdownPreviewView extends NestedScrollView {
     private Context mContext;
     private OnLoadingFinishListener mLoadingFinishListener;
     private ContentListener mContentListener;
+    String format;
 
     public MarkdownPreviewView(Context context) {
         super(context);
@@ -72,11 +84,67 @@ public class MarkdownPreviewView extends NestedScrollView {
             this.mWebView.loadUrl("file:///android_asset/markdown.html");
             addView(this.mWebView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         }
+        format = QFile4a.Assets.getStr4Assets(getContext(), "index.html");
+    }
+
+
+    // 从本地文件加预览 md
+    public void showMdFromFile(String filePath){
+        String mdStr = null;
+       // filePath = FilePathTools.getRealPath(filePath);
+        File file = new File(filePath);
+        try {
+            mdStr = getStr(file);
+        } catch (IOException e) {
+            mdStr = "请给予文件读写权限,否则无法查看本地文件";
+            String error =  e.getMessage();
+            QLog.i("文件读取失败{}", error);
+            e.printStackTrace();
+        }
+
+        // 创建对应文件夹
+        String mdCache = QLog.PATH.getAppCachePath(getContext()) + "/" + filePath.hashCode() + file.getName() + "/_" + file.getName() + ".html";
+        // html文件
+        File fileHtml = new File(mdCache);
+        // 创建历史文件夹
+        QFile4a.MFolder.createDirectory(fileHtml.getParent());
+
+        String mdHtml = String.format(format, file.getName(), file.getName(), mdStr);
+        QFile4a.Write.save(fileHtml, mdHtml);
+        mWebView.loadUrl( "file:///" + mdCache);
+    }
+
+    // 直接从文本编辑器里面加载
+    public void showMdFromStr(String mdStr){
+        // 文件路径
+        String filePath =  (String) DataPool.getInstance().get("file_select");
+        // 文件标题
+        String title = "null";
+        // 文件缓存路径
+        String cachePath = QLog.PATH.getAppCachePath(getContext());
+
+        if(filePath == null){ // 没有文件的话,就用默认的
+            cachePath +=  "/" + "00_default/_default.html";
+        }
+        else{   // 创建对应文件夹
+            title = new File(filePath).getName();
+            cachePath +=  "/" + filePath.hashCode() + title + "/_" + title + ".html";
+        }
+
+        // html文件
+        File fileHtml = new File(cachePath);
+        // 创建历史文件夹
+        QFile4a.MFolder.createDirectory(fileHtml.getParent());
+
+        String mdHtml = String.format(format, title, title, mdStr);
+        QFile4a.Write.save(fileHtml, mdHtml);
+        mWebView.loadUrl( "file:///" + cachePath);
     }
 
     public final void parseMarkdown(String str, boolean z) {
         this.mWebView.loadUrl("javascript:parseMarkdown(\"" + str.replace("\n", "\\n").replace("\"", "\\\"").replace("'", "\\'") + "\", " + z + ")");
     }
+
 
     public void setContentListener(ContentListener contentListener) {
         this.mContentListener = contentListener;
@@ -142,5 +210,19 @@ public class MarkdownPreviewView extends NestedScrollView {
         mWebView.draw(canvas);
         return bmp;
     }
+
+    public static String getStr(File file) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(new FileReader(file.getPath()));
+        char[] buff = new char[1024];
+
+        while(br.read(buff) != -1) {
+            sb.append(buff);
+            buff = new char[1024];
+        }
+
+        return sb.toString();
+    }
+
 
 }

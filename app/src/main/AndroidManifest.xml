@@ -26,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
+        <!--小米8不加这行会报错闪退-->
+        <uses-library android:name="org.apache.http.legacy" android:required="true" />
+
         <activity
             android:name=".view.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

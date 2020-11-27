@@ -18,18 +18,18 @@ package ren.qinc.markdowneditors.view;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.view.MenuItemCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +41,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import blxt.qandroid.base.DataPool;
 import butterknife.Bind;
 import butterknife.OnClick;
 import ren.qinc.markdowneditors.R;
@@ -287,6 +288,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         if (fileBean.isDirectory) {//文件夹
             mPresenter.enterFolder(fileBean.absPath);
         } else {//文件
+            DataPool.getInstance().put("file_select", fileBean.absPath);
             Intent intent = new Intent(mContext, EditorActivity.class);
             intent.setAction(Intent.ACTION_VIEW);
             //设置数据URI与数据类型匹配
@@ -377,7 +379,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             }
         });
 
-        AppCompatAutoCompleteTextView editText = (AppCompatAutoCompleteTextView) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        AppCompatAutoCompleteTextView editText = (AppCompatAutoCompleteTextView) searchView.findViewById(androidx.appcompat.R.id.search_src_text);
 
 
     }

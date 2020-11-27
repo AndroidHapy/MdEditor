@@ -16,8 +16,8 @@
 package ren.qinc.markdowneditors.utils;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 
 /**
  * 颜色相关工具

@@ -16,10 +16,14 @@
 
 package ren.qinc.markdowneditors.model;
 
-import android.support.annotation.NonNull;
+import android.os.Environment;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ren.qinc.markdowneditors.entity.FileBean;
@@ -132,6 +136,66 @@ public class DataManager {
 //                .toList()
                 .toSortedList(this::fileSort)
                 .compose(RxUtils.applySchedulersIoAndMainThread());
+    }
+
+    /***
+     * 获取默认文件夹
+     * @return
+     */
+    public List<FileBean> getDefaultPath(){
+        List<FileBean> fileList = new ArrayList<>();
+        String SdPath = Environment.getExternalStorageDirectory().getPath();
+
+        //LOG.i("获取默认文件夹" , SdPath);
+        String[] defaultPath = new String[]{ "","tencent/QQfile_recv", "tencent/TIMfile_recv", "tencent/MicroMsg/Download", "DingTalk"};
+        String[] defaultPathName = new String[]{ "根目录","QQ", "TIM", "微信", "钉钉"};
+
+        // 添加默认文件到集合
+        for (int i= 0; i < defaultPath.length; i++){
+            FileBean fileBean = createFileBean(SdPath + "/" + defaultPath[i],
+                    defaultPathName[i],true);
+            if(fileBean != null) {
+                fileList.add(fileBean);
+            }
+        }
+
+        return fileList;
+    }
+
+
+    /**
+     * 创建一个 FileBean
+     * @param path
+     * @param name
+     * @param isDirectory
+     * @return
+     */
+    public static FileBean createFileBean(String path,String name,boolean isDirectory){
+        boolean isCreate = false;
+        File file = new File(path.trim());
+        if(!file.exists()){ // 跳过不存在的路径
+            if(!isCreate){ // 不存在,是否创建
+                return null;
+            }
+            else if(isDirectory) { // 创建文件夹
+                file.mkdir();
+            }else{ // 创建文件
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+
+        FileBean fileBean = new FileBean();
+        fileBean.absPath = path;
+        fileBean.name = name;
+        fileBean.isDirectory = isDirectory;
+        fileBean.lastTime = new Date(file.lastModified()); // 最后修改时间
+
+        return  fileBean;
     }
 
     /**

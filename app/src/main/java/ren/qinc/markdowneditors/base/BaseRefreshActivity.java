@@ -16,7 +16,7 @@
 
 package ren.qinc.markdowneditors.base;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import butterknife.Bind;
 import ren.qinc.markdowneditors.R;

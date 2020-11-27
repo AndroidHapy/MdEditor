@@ -24,13 +24,13 @@
               android:paddingRight="15dp"
               android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
                                                    android:id="@+id/inputHint"
                                                    android:layout_width="match_parent"
                                                    style="@style/DialogTheme"
                                                    android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/text"
             android:focusable="true"
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             style="@style/DialogTheme"
             android:layout_height="wrap_content"
             android:hint="请输入"/>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"

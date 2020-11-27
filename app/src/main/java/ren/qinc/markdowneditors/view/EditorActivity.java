@@ -22,14 +22,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,6 +39,7 @@ import android.widget.EditText;
 
 import java.io.File;
 
+import blxt.android.editormd.ui.editor.PreviewFragment;
 import butterknife.Bind;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseApplication;
@@ -53,7 +54,6 @@ import ren.qinc.markdowneditors.utils.SystemBarUtils;
 import ren.qinc.markdowneditors.utils.Toast;
 import ren.qinc.markdowneditors.widget.TabIconView;
 
-
 public class EditorActivity extends BaseToolbarActivity implements IEditorActivityView, View.OnClickListener {
     public static final String SHARED_ELEMENT_NAME = "SHARED_ELEMENT_NAME";
     public static final String SHARED_ELEMENT_COLOR_NAME = "SHARED_ELEMENT_COLOR_NAME";
@@ -62,6 +62,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
     private EditorFragment mEditorFragment;
     private EditorMarkdownFragment mEditorMarkdownFragment;
+    private PreviewFragment previewFragment;
 
     private String mName;
     private String currentFilePath;
@@ -87,6 +88,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
         getIntentData();
         mEditorFragment = EditorFragment.getInstance(currentFilePath);
         mEditorMarkdownFragment = EditorMarkdownFragment.getInstance();
+    //    previewFragment = new PreviewFragment();
 
         initViewPager();
         initTab();
@@ -209,7 +211,8 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
             if (position == 0) {
                 return mEditorFragment;
             }
-            return mEditorMarkdownFragment;
+          return mEditorMarkdownFragment;
+            //  return previewFragment;
         }
 
         @Override
@@ -342,7 +345,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
                 Toast.showShort(this, "图片处理失败");
             }
         }
-
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 

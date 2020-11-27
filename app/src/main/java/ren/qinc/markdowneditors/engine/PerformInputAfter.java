@@ -16,7 +16,7 @@
 
 package ren.qinc.markdowneditors.engine;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;

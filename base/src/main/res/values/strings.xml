@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MdReader</string>
+    <string name="app_copyright">开源项目:\nhttps://github.com/AndroidHapy/MdEditor \n 欢迎star和fork</string>
+</resources>

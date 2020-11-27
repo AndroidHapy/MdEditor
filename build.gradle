@@ -28,6 +28,7 @@ allprojects {
         }
         google()
         maven { url 'http://uk.maven.org/maven2' }
+        maven { url 'http://maven.zhangjialei.cn:8083/repository/maven-public/' }
     }
 }
 

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--引入样式文件-->
+    <link rel="stylesheet" href="../../files/edit/editor.md/examples/css/style.css" />
+    <link rel="stylesheet" href="../../files/edit/editor.md/css/editormd.preview.css" />
+   
+	<link rel="stylesheet" href="../../files/edit/plugin/menu2/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="../../files/edit/plugin/menu2/css/style.css"> <!-- Resource style -->
+	
+	    <!--引入js文件-->
+    <script src="../../files/edit/editor.md/examples/js/jquery.min.js"></script>
+    <script src="../../files/edit/editor.md/lib/marked.min.js"></script>
+    <script src="../../files/edit/editor.md/lib/prettify.min.js"></script>
+    <script src="../../files/edit/editor.md/lib/raphael.min.js"></script>
+    <script src="../../files/edit/editor.md/lib/underscore.min.js"></script>
+    <script src="../../files/edit/editor.md/lib/sequence-diagram.min.js"></script>
+    <script src="../../files/edit/editor.md/lib/flowchart.min.js"></script>
+    <script src="../../files/edit/editor.md/lib/jquery.flowchart.min.js"></script>
+	<script src="../../files/edit/editor.md/editormd.js"></script>
+	
+    <script src="../../files/edit/editor.md.help/autoHtml.js"></script>
+		
+	<script src="../../files/edit/plugin/menu2/js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="../../files/edit/plugin/menu2/js/main.js"></script> <!-- Resource jQuery -->
+ 
+	<title>%s</title>
+	
+	<!--js开始-->
+		<script type="text/javascript"> 
+			window.onload = mdToHml; 
+		</script>
+
+</head>
+<body>
+	<header style="position: fixed;"> <!-- 头 -->
+		<a id="cd-logo" href="#0">%s </a>
+		<nav id="cd-top-nav">
+			<ul>
+				<li><a href="#0">预览</a></li>
+				<li><a href="#0">保存</a></li> 
+			</ul>
+		</nav>
+		<a id="cd-menu-trigger" href="#0"><span class="cd-menu-text"> </span><span class="cd-menu-icon"></span></a>
+	</header>
+	<main class="cd-main-content"> <!-- 主要内容 --->
+
+				<div id="editormd">
+				 					<!--TODO 这里自动从指定路径导入.md的文件到mddoc中-->
+				<!--输入需要转换的markdown文件开始 display:none; -->
+				<textarea id="mddoc" style="width:800px;height:300px; display:none;">
+%s
+          
+					</textarea>   	<!--输入需要转换的markdown文件结束-->
+				  
+					<div id="editormd-preview"><!--在该div中展示-->
+						<textarea id="previewArea" style="display:none;"></textarea>
+					</div>
+				</div>
+		 
+
+	</main>  
+
+	<nav id="cd-lateral-nav"> <!-- 右边抽屉 --->
+	 
+		<ul class="cd-navigation cd-single-item-wrapper"><!-- 目录 -->
+			<li><a class="current" href="#0">目录</a></li> 
+			<ul class="menu-toc"> </ul>
+		</ul> 
+ 
+ 		<div class="cd-navigation socials" style="display:none;" ><!-- 连接 -->
+			<a class="cd-twitter cd-img-replace" href="#0">Twitter</a>
+			<a class="cd-github cd-img-replace" href="#0">Git Hub</a>
+			<a class="cd-facebook cd-img-replace" href="#0">Facebook</a>
+			<a class="cd-google cd-img-replace" href="#0">Google Plus</a>
+		</div>  
+	</nav>
+	
+
+</div>
+</body>
+
+</html>

@@ -15,17 +15,28 @@
  */
 package ren.qinc.markdowneditors.view;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.IdRes;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.blxt.quickfile4a.QFile4a;
+import com.blxt.quicklog.QLog;
+import com.blxt.utils.check.CheckUtils;
 import com.pgyersdk.javabean.AppBean;
 import com.pgyersdk.update.PgyUpdateManager;
 import com.pgyersdk.update.UpdateManagerListener;
 
+import java.io.File;
+
+import blxt.android.editormd.util.ZipUtils;
 import ren.qinc.markdowneditors.AppContext;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseDrawerLayoutActivity;
@@ -66,7 +77,31 @@ public class MainActivity extends BaseDrawerLayoutActivity {
             setDefaultFragment(R.id.content_fragment_container);
         }
 
-        initUpdate(false);
+        String htmlPath = QLog.PATH.getAppFilesPath(this);
+
+        boolean fal = CheckUtils.isEmpty(new File(htmlPath + "/edit/version.txt"));
+
+        if(fal) {
+            QLog.i("初始化解压:{}", htmlPath);
+            try {
+                //   ZipUtils.UnZipAssetsFolder(this, "mdEditorer.zip", htmlPath + "/edit");
+                ZipUtils.unZip(this,  "mdEditorer.zip", htmlPath + "/edit", true);
+
+                QFile4a.Assets.copyFile4Asstes(this, "index.html", new File(htmlPath + "/index.html"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 检查更新
+        //initUpdate(false);
+        if (ContextCompat.checkSelfPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, "android.permission.READ_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED
+        ) {
+            verifyStoragePermissions(this);
+        }
+
     }
 
     private void setDefaultFragment(@IdRes int fragmentId) {
@@ -167,6 +202,7 @@ public class MainActivity extends BaseDrawerLayoutActivity {
                     @Override
                     public void onUpdateAvailable(final String result) {
                         final AppBean appBean = getAppBeanFromString(result);
+
                         if (appBean.getReleaseNote().startsWith("####")) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
                             builder
@@ -208,5 +244,45 @@ public class MainActivity extends BaseDrawerLayoutActivity {
                     }
                 });
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permission,
+                                           int[] grantResults) {
+        //requestCode就是requestPermissions()的第三个参数
+        //permission就是requestPermissions()的第二个参数
+        //grantResults是结果，0调试通过，-1表示拒绝
+        if(requestCode == REQUEST_EXTERNAL_STORAGE){
+            QLog.i("权限授权结果{},{}", grantResults, permission);
+            int res = 0;
+            for(int i : grantResults){
+                res += i;
+            }
+//            if(res == 0){
+//                startActivity(PreviewActivity.class);
+//            }
+        }
+    }
+
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE);
+        }
+    }
+
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION};
+
 
 }

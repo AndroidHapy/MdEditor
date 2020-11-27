@@ -17,7 +17,7 @@
 package ren.qinc.markdowneditors.base;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 
 /**
  * Created by 沈钦赐 on 16/21/25.
