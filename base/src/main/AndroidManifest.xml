@@ -9,7 +9,7 @@
 
 
     <application>
-        <activity android:name=".ui.BaseActivity" />
+        <activity android:name=".ui.MBaseActivity" />
         <activity android:name=".ui.AbsDrawerActivity"
                   android:theme="@style/AppTheme.NoActionBar"  />
     </application>

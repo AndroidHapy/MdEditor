@@ -23,6 +23,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
+
+import com.blxt.quicklog.QLog;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -61,7 +63,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
     private static final String SCHEME_Folder = "folder";
 
     private EditorFragment mEditorFragment;
-    private EditorMarkdownFragment mEditorMarkdownFragment;
+    private PreviewMdFragment mPreviewMdFragment;
     private PreviewFragment previewFragment;
 
     private String mName;
@@ -87,7 +89,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
         getIntentData();
         mEditorFragment = EditorFragment.getInstance(currentFilePath);
-        mEditorMarkdownFragment = EditorMarkdownFragment.getInstance();
+        mPreviewMdFragment = PreviewMdFragment.getInstance();
     //    previewFragment = new PreviewFragment();
 
         initViewPager();
@@ -211,7 +213,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
             if (position == 0) {
                 return mEditorFragment;
             }
-          return mEditorMarkdownFragment;
+          return mPreviewMdFragment;
             //  return previewFragment;
         }
 
@@ -240,6 +242,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
                     if (uri != null && SCHEME_FILE.equalsIgnoreCase(uri.getScheme())) {
                         //这是一个文件
                         currentFilePath = FileUtils.uri2FilePath(getBaseContext(), uri);
+                        QLog.i("打开文件{}", currentFilePath);
                     }
                 }
             }

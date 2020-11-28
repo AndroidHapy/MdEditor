@@ -17,7 +17,6 @@
 package com.blxt.mdedit.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -36,7 +35,7 @@ import com.blxt.mdedit.widget.MarkdownPreviewView;
  * 编辑预览界面
  * Created by 沈钦赐 on 16/1/21.
  */
-public class EditorMarkdownFragment extends BaseFragment {
+public class PreviewMdFragment extends BaseFragment {
     @Bind(R.id.markdownView)
     protected MarkdownPreviewView mMarkdownPreviewView;
     @Bind(R.id.title)
@@ -44,12 +43,12 @@ public class EditorMarkdownFragment extends BaseFragment {
     private String mContent;
 
 
-    public EditorMarkdownFragment() {
+    public PreviewMdFragment() {
 
     }
 
-    public static EditorMarkdownFragment getInstance() {
-        EditorMarkdownFragment editorFragment = new EditorMarkdownFragment();
+    public static PreviewMdFragment getInstance() {
+        PreviewMdFragment editorFragment = new PreviewMdFragment();
         return editorFragment;
     }
 
@@ -72,8 +71,10 @@ public class EditorMarkdownFragment extends BaseFragment {
 
             mContent = event.o[1].toString();
 
-            boolean isChange =  (Boolean) DataPool.getInstance().get("updata_mdview");
+            Boolean isChange = (Boolean) DataPool.getInstance().get("updata_mdview");
+            isChange = isChange == null ? false : isChange;
             if(!isChange){
+                QLog.i("预览文件, 文件未变更");
                 return;
             }
 

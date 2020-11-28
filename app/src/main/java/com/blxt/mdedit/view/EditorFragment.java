@@ -109,7 +109,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
             protected void onTextChanged(Editable s) {
                 //文本改变
                 mPresenter.textChange();
-                DataPool.getInstance().put("updata_mdview", true);
+                DataPool.getInstance().put("updata_mdview", (boolean)true);
             }
         };
 
@@ -118,7 +118,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
             protected void onTextChanged(Editable s) {
                 //文本改变
                 mPresenter.textChange();
-                DataPool.getInstance().put("updata_mdview", true);
+                DataPool.getInstance().put("updata_mdview", (boolean)true);
             }
         };
 
@@ -128,6 +128,8 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
         //装置数据
         if (file.isFile())
             mPresenter.loadFile();
+
+        DataPool.getInstance().put("updata_mdview", (boolean)true);
     }
 
 
