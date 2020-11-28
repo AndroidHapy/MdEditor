@@ -7,40 +7,40 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <application>
+<!--    <application>-->
 
-        <activity
-            android:name=".PreviewActivity"
-            android:theme="@style/AppTheme.NoActionBar"  >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.EDIT" />
+<!--        <activity-->
+<!--            android:name=".PreviewActivity"-->
+<!--            android:theme="@style/AppTheme.NoActionBar"  >-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <action android:name="android.intent.action.EDIT" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+<!--&lt;!&ndash;                <category android:name="android.intent.category.DEFAULT" />&ndash;&gt;-->
+<!--&lt;!&ndash;                <category android:name="android.intent.category.BROWSABLE" />&ndash;&gt;-->
 
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.md"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.markdown"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.mdown"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.txt"
-                    android:scheme="file" />
-            </intent-filter>
-        </activity>
-    </application>
+<!--                <data-->
+<!--                    android:host="*"-->
+<!--                    android:mimeType="*/*"-->
+<!--                    android:pathPattern=".*\\.md"-->
+<!--                    android:scheme="file" />-->
+<!--                <data-->
+<!--                    android:host="*"-->
+<!--                    android:mimeType="*/*"-->
+<!--                    android:pathPattern=".*\\.markdown"-->
+<!--                    android:scheme="file" />-->
+<!--                <data-->
+<!--                    android:host="*"-->
+<!--                    android:mimeType="*/*"-->
+<!--                    android:pathPattern=".*\\.mdown"-->
+<!--                    android:scheme="file" />-->
+<!--                <data-->
+<!--                    android:host="*"-->
+<!--                    android:mimeType="*/*"-->
+<!--                    android:pathPattern=".*\\.txt"-->
+<!--                    android:scheme="file" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--    </application>-->
 
 </manifest>

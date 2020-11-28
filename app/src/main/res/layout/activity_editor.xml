@@ -46,7 +46,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/shadow"/>
 
-            <ren.qinc.markdowneditors.lib.ExpandableLinearLayout
+            <com.blxt.mdedit.lib.ExpandableLinearLayout
                 android:id="@+id/action_other_operate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,13 +56,13 @@
                 app:el_duration="400"
                 app:el_expanded="false">
 
-                <ren.qinc.markdowneditors.widget.TabIconView
+                <com.blxt.mdedit.widget.TabIconView
                     android:id="@+id/tabIconView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_expandable="true"/>
 
-            </ren.qinc.markdowneditors.lib.ExpandableLinearLayout>
+            </com.blxt.mdedit.lib.ExpandableLinearLayout>
         </FrameLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

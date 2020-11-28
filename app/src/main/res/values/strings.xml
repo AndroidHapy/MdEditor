@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name" translatable="false">MarkdownEditors</string>
+    <string name="app_name" translatable="false">MdEditor</string>
     <!--webViewActivity相关菜单-->
     <string name="action_refresh">刷新</string>
     <string name="action_copy_url">复制链接</string>

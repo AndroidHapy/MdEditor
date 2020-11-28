@@ -31,7 +31,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ren.qinc.markdowneditors.widget.TabView
+        <com.blxt.mdedit.widget.TabView
             android:id="@+id/tab_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     android:textSize="14sp"/>
             </LinearLayout>
 
-            <ren.qinc.markdowneditors.widget.SimpleSwipeRefreshLayout
+            <com.blxt.mdedit.widget.SimpleSwipeRefreshLayout
                 android:id="@+id/id_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -87,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-            </ren.qinc.markdowneditors.widget.SimpleSwipeRefreshLayout>
+            </com.blxt.mdedit.widget.SimpleSwipeRefreshLayout>
 
 
             <ImageView
@@ -106,5 +106,5 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add_white_24dp"
-        app:layout_behavior="ren.qinc.markdowneditors.widget.ScrollAwareFABBehavior2"/>
+        app:layout_behavior="com.blxt.mdedit.widget.ScrollAwareFABBehavior2"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

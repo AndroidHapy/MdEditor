@@ -31,7 +31,7 @@
 
         <include layout="@layout/view_common_toolbar_scroll"/>
 
-        <ren.qinc.markdowneditors.widget.MarkdownPreviewView
+        <com.blxt.mdedit.widget.MarkdownPreviewView
             android:id="@+id/markdownView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
