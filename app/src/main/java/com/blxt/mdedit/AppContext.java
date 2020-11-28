@@ -16,6 +16,7 @@
 package com.blxt.mdedit;
 
 import com.blxt.mdedit.base.BaseApplication;
+import com.blxt.quicklog.crash.CrashHandler;
 
 /**
  * Created by 沈钦赐 on 16/1/26.
@@ -23,15 +24,23 @@ import com.blxt.mdedit.base.BaseApplication;
 public class AppContext extends BaseApplication {
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+
+        CrashHandler.getInstance(this);//替换默认对象为当前对象
+
+    }
+
+    @Override
     protected boolean hasMemoryLeak() {
-//        return BuildConfig.DEBUG;
-        return false;
+        return BuildConfig.DEBUG;
+//        return false;
     }
 
     @Override
     protected boolean hasCrashLog() {
-//        return BuildConfig.DEBUG;
-        return false;
+        return BuildConfig.DEBUG;
+//        return false;
     }
 
 }
