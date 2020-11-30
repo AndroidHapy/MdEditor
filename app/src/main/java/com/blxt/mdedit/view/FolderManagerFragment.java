@@ -467,7 +467,12 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             getActivity().supportInvalidateOptionsMenu();//恢复
             searchViewIsShow = false;
             return true;
-        } else {
+        }
+        else if(mPresenter.isEditMode()){ // 关闭编辑模式
+            closeEditMode();
+            return true;
+        }
+        else {
             return mPresenter.backFolder();
         }
     }

@@ -48,10 +48,10 @@
         app:showAsAction="never"/>
 
 
-    <!--<item-->
-        <!--android:id="@+id/action_setting"-->
-        <!--android:icon="@drawable/ic_settings_menu"-->
-        <!--android:orderInCategory="87"-->
-        <!--android:title="@string/action_setting"-->
-        <!--app:showAsAction="never"/>-->
+    <item
+        android:id="@+id/action_setting"
+        android:icon="@drawable/ic_settings_menu"
+        android:orderInCategory="87"
+        android:title="@string/action_setting"
+        app:showAsAction="never"/>
 </menu>
